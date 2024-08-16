@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://beh1h687x0i4e"]
+
+[ext_resource type="Texture2D" uid="uid://j6q15vsygcba" path="res://icon.svg" id="1_3kihp"]
+[ext_resource type="Script" path="res://ant.gd" id="1_4nt48"]
+
+[node name="Ant" type="Node2D"]
+script = ExtResource("1_4nt48")
+speed = 10.0
+rotate_speed = 1.11
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.023, 0.04)
+texture = ExtResource("1_3kihp")
+
+[node name="Camera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -3)
+ignore_rotation = false
+zoom = Vector2(30, 30)
+rotation_smoothing_enabled = true

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dixe43c8v5eku"]
+
+[ext_resource type="Texture2D" uid="uid://b5a2mjy4dogyp" path="res://pictures/KiraKarton.jpg" id="1_8h12m"]
+[ext_resource type="PackedScene" uid="uid://beh1h687x0i4e" path="res://ant.tscn" id="2_kf5pa"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="KiraKarton" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.178, 0.178)
+texture = ExtResource("1_8h12m")
+
+[node name="SpawnPoint" type="Node2D" parent="KiraKarton"]
+position = Vector2(674.157, -1078.65)
+scale = Vector2(5.61798, 5.61798)
+
+[node name="Ant" parent="KiraKarton/SpawnPoint" instance=ExtResource("2_kf5pa")]
