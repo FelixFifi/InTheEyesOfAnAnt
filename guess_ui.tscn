@@ -1,0 +1,94 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs6uyiqu4q57x"]
+
+[ext_resource type="Script" path="res://guess_ui.gd" id="1_o0wh0"]
+
+[sub_resource type="Theme" id="Theme_dmn5a"]
+default_font_size = 25
+
+[node name="GuessUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o0wh0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 13.45
+focus_mode = 1
+
+[node name="Panel" type="Panel" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Control2" type="Control" parent="CanvasLayer/VBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GuessText" type="LineEdit" parent="CanvasLayer/VBoxContainer/Panel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.05
+placeholder_text = "What is the ant exploring?"
+max_length = 64
+context_menu_enabled = false
+
+[node name="GuessButton" type="Button" parent="CanvasLayer/VBoxContainer/Panel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Guess!"
+
+[node name="Control" type="Control" parent="CanvasLayer/VBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GuessContainer" type="CenterContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GuessContainer"]
+layout_mode = 2
+
+[node name="GuessCorrectLabel" type="Label" parent="CanvasLayer/GuessContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 1
+theme = SubResource("Theme_dmn5a")
+text = "You guessed correctly!
+This is a \"...\""
+horizontal_alignment = 1
+
+[connection signal="focus_entered" from="CanvasLayer/VBoxContainer/Panel/HBoxContainer/GuessText" to="." method="_on_guess_text_focus_entered"]
+[connection signal="focus_exited" from="CanvasLayer/VBoxContainer/Panel/HBoxContainer/GuessText" to="." method="_on_guess_text_focus_exited"]
+[connection signal="text_submitted" from="CanvasLayer/VBoxContainer/Panel/HBoxContainer/GuessText" to="." method="_on_guess_text_text_submitted"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Panel/HBoxContainer/GuessButton" to="." method="_on_guess_button_pressed"]

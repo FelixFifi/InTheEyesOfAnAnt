@@ -4,6 +4,7 @@ extends Node2D
 @export var zoom_speed: float = 5
 @export var rotate_speed: float = 0.75
 
+var movement_allowed: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,6 +13,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if not movement_allowed:
+		return
+
 	move_local_y(-Input.get_axis("ant_backward", "ant_forward") * delta * speed)
 
 	rotate(delta * rotate_speed * Input.get_axis("ant_turn_left", "ant_turn_right"))
