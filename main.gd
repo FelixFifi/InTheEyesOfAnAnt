@@ -10,6 +10,7 @@ func _ready():
 	current_picture = $KiraKarton
 	ant = current_picture.get_ant()
 	ant.target_entered.connect(_on_ant_enter_target)
+	%PheromoneTrail.add_point(ant.global_position)
 
 func _on_guess_ui_guess_text_focus_changed(focused):
 	current_picture.get_ant().movement_allowed = not focused
@@ -21,3 +22,7 @@ func _on_guess_ui_guess_button_pressed(guess: String):
 
 func _on_ant_enter_target():
 	target_reached.emit()
+
+
+func _on_pheromone_timer_timeout():
+	%PheromoneTrail.add_point(ant.global_position)
