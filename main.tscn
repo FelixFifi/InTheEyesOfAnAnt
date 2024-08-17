@@ -20,6 +20,7 @@ scale = Vector2(5.61798, 5.61798)
 
 [node name="Ant" parent="KiraKarton/SpawnPoint" instance=ExtResource("2_2r5tl")]
 unique_name_in_owner = true
+fly_speed = 30.0
 
 [node name="GuessUI" parent="." instance=ExtResource("4_7p14f")]
 unique_name_in_owner = true

@@ -7,6 +7,7 @@
 script = ExtResource("1_4nt48")
 speed = 10.0
 rotate_speed = 1.11
+fly_speed = 40.0
 
 [node name="Icon" type="Sprite2D" parent="."]
 scale = Vector2(0.023, 0.04)
@@ -18,3 +19,16 @@ position = Vector2(0, -3)
 ignore_rotation = false
 zoom = Vector2(30, 30)
 rotation_smoothing_enabled = true
+
+[node name="FlyTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.721
+one_shot = true
+
+[node name="FlyCooldownTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="FlyTimer" to="." method="_on_fly_timer_timeout"]
+[connection signal="timeout" from="FlyCooldownTimer" to="." method="_on_fly_cooldown_timer_timeout"]
