@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqe1n8j6y1kct"]
+
+[ext_resource type="Texture2D" uid="uid://b5a2mjy4dogyp" path="res://pictures/KiraKarton.jpg" id="1_yj01d"]
+[ext_resource type="Script" path="res://picture.gd" id="2_iw2c6"]
+
+[node name="KiraKarton" type="Sprite2D" node_paths=PackedStringArray("target_zones")]
+position = Vector2(0, -1)
+scale = Vector2(0.178, 0.178)
+texture = ExtResource("1_yj01d")
+script = ExtResource("2_iw2c6")
+valid_guesses = Array[String](["cat", "feline", "pussy", "kitty", "maine coon", "kira"])
+target_zones = [NodePath("Ear1"), NodePath("Ear2")]
+target_description = "the tip of an ear"
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(640.449, -1028.09)
+scale = Vector2(5.61798, 5.61798)
+
+[node name="Ear1" type="Area2D" parent="."]
+collision_layer = 2
+monitoring = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ear1"]
+polygon = PackedVector2Array(-780.899, -629.214, -814.607, -488.764, -741.573, -477.528, -747.191, -629.214)
+
+[node name="Ear2" type="Area2D" parent="."]
+collision_layer = 2
+monitoring = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ear2"]
+position = Vector2(-410.112, 129.213)
+polygon = PackedVector2Array(-842.697, -623.596, -808.989, -477.528, -674.157, -550.562, -719.101, -595.506, -808.989, -646.067)

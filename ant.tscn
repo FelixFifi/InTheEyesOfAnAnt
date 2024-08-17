@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://beh1h687x0i4e"]
+[gd_scene load_steps=4 format=3 uid="uid://beh1h687x0i4e"]
 
 [ext_resource type="Texture2D" uid="uid://j6q15vsygcba" path="res://icon.svg" id="1_3kihp"]
 [ext_resource type="Script" path="res://ant.gd" id="1_4nt48"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8il1n"]
+radius = 63.56
+height = 127.12
 
 [node name="Ant" type="Node2D"]
 script = ExtResource("1_4nt48")
@@ -12,6 +16,14 @@ fly_speed = 40.0
 [node name="Icon" type="Sprite2D" parent="."]
 scale = Vector2(0.023, 0.04)
 texture = ExtResource("1_3kihp")
+
+[node name="Area2D" type="Area2D" parent="Icon"]
+unique_name_in_owner = true
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/Area2D"]
+shape = SubResource("CapsuleShape2D_8il1n")
 
 [node name="Camera" type="Camera2D" parent="."]
 unique_name_in_owner = true
@@ -30,5 +42,6 @@ unique_name_in_owner = true
 wait_time = 3.0
 one_shot = true
 
+[connection signal="area_entered" from="Icon/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="FlyTimer" to="." method="_on_fly_timer_timeout"]
 [connection signal="timeout" from="FlyCooldownTimer" to="." method="_on_fly_cooldown_timer_timeout"]
