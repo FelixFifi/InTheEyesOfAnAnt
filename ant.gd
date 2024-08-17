@@ -37,13 +37,6 @@ func _process(delta):
 
 
 func _unhandled_input(event):
-	if event.is_action_pressed("zoom_decrease"):
-		%Camera.zoom -= Vector2(1,1) * zoom_speed
-		print(%Camera.zoom)
-	if event.is_action_pressed("zoom_increase"):
-		%Camera.zoom += Vector2(1,1) * zoom_speed
-		print(%Camera.zoom)
-
 	if not flying and fly_available and event.is_action_pressed("ant_fly"):
 		start_flying()
 
@@ -71,6 +64,11 @@ func stop_flying():
 func enable_target_search():
 	%Area2D.monitoring = true
 
+func disable_camera():
+	%Camera.enabled = false
+
+func get_camera_position():
+	return %Camera.global_position
 
 func _on_fly_timer_timeout():
 	stop_flying()
@@ -80,5 +78,4 @@ func _on_fly_cooldown_timer_timeout():
 
 
 func _on_area_2d_area_entered(_area):
-	print("target entered")
 	target_entered.emit()

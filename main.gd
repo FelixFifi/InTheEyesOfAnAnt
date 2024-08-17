@@ -6,6 +6,7 @@ signal target_reached()
 var current_picture: Picture
 var ant: Ant
 
+
 func _ready():
 	current_picture = $KiraKarton
 	ant = current_picture.get_ant()
@@ -20,9 +21,16 @@ func _on_guess_ui_guess_button_pressed(guess: String):
 		guess_correct.emit(guess.to_lower(), current_picture.get_target_description())
 		ant.enable_target_search()
 
-func _on_ant_enter_target():
+func end_level():
+	current_picture.finished = true
+	ant.disable_camera()
 	target_reached.emit()
+	current_picture.show_full_image(ant.get_camera_position(), ant.zoom_default)
+	%PheromoneTrail.width = 2
 
+func _on_ant_enter_target():
+	if current_picture.finished == false:
+		end_level()
 
 func _on_pheromone_timer_timeout():
 	%PheromoneTrail.add_point(ant.global_position)
