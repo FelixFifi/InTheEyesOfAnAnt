@@ -61,6 +61,7 @@ func end_level():
 	await get_tree().create_timer(10).timeout
 	var next_level_index: int = (level_index + 1) % levels.size()
 	load_picture(levels[next_level_index])
+	level_index = next_level_index
 
 func _on_ant_enter_target():
 	if current_picture.finished == false:

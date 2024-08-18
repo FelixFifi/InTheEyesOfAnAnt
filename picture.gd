@@ -15,6 +15,7 @@ var finished: bool = false
 func _ready():
 	ant = ANT.instantiate()
 	ant.position = %SpawnPoint.global_position
+	ant.rotation = %SpawnPoint.global_rotation
 	add_child(ant)
 	%EndCamera.enabled = false
 

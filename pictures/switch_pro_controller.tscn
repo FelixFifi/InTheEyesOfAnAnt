@@ -9,14 +9,14 @@ valid_guesses = Array[String](["controller", "switch pro", "Switch controller", 
 target_description = "the A button"
 
 [node name="Controller" type="Sprite2D" parent="."]
-rotation = 1.5708
+rotation = 4.71239
 scale = Vector2(0.047, 0.047)
 texture = ExtResource("2_spssu")
 
 [node name="SpawnPoint" type="Node2D" parent="Controller"]
 unique_name_in_owner = true
 position = Vector2(-1212.77, -1361.7)
-scale = Vector2(5.61798, 5.61798)
+rotation = 0.706858
 
 [node name="EndCamera" type="Camera2D" parent="."]
 unique_name_in_owner = true
@@ -30,4 +30,5 @@ collision_mask = 0
 monitoring = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(-54, 11, -58, 13, -59, 17, -58, 20, -54, 22, -49, 20, -49, 14)
+position = Vector2(107, -34)
+polygon = PackedVector2Array(-52, 12, -58, 13, -59, 17, -58, 20, -54, 22, -49, 21, -48, 16)

@@ -16,7 +16,7 @@ texture = ExtResource("1_yj01d")
 [node name="SpawnPoint" type="Node2D" parent="Sprite"]
 unique_name_in_owner = true
 position = Vector2(668.539, -1005.62)
-scale = Vector2(5.61798, 5.61798)
+rotation = -0.560251
 
 [node name="Ear1" type="Area2D" parent="Sprite"]
 collision_layer = 2
