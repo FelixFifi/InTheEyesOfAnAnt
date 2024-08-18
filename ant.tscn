@@ -10,12 +10,14 @@ height = 127.12
 [node name="Ant" type="Node2D"]
 z_index = 2
 script = ExtResource("1_4nt48")
-speed = 10.0
+speed = 100.0
 rotate_speed = 1.11
-fly_speed = 40.0
+fly_speed = 400.0
+zoom_default = 3.0
+zoom_flying = 2.0
 
 [node name="Icon" type="Sprite2D" parent="."]
-scale = Vector2(0.023, 0.04)
+scale = Vector2(0.23, 0.4)
 texture = ExtResource("1_3kihp")
 
 [node name="Area2D" type="Area2D" parent="Icon"]
@@ -28,9 +30,9 @@ shape = SubResource("CapsuleShape2D_8il1n")
 
 [node name="Camera" type="Camera2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -3)
+position = Vector2(0, -38)
 ignore_rotation = false
-zoom = Vector2(30, 30)
+zoom = Vector2(3, 3)
 rotation_smoothing_enabled = true
 
 [node name="FlyTimer" type="Timer" parent="."]

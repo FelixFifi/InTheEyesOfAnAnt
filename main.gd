@@ -11,6 +11,9 @@ var ant: Ant
 const GUESS_UI = preload("res://guess_ui.tscn")
 var guess_ui: GuessUI
 
+const PHEROMONE_TRAIL_WIDTH_DEFAULT = 7
+const PHEROMONE_TRAIL_END = 20
+
 func load_picture(picture_scene: PackedScene):
 	if guess_ui != null:
 		guess_ui.queue_free()
@@ -29,6 +32,7 @@ func load_picture(picture_scene: PackedScene):
 	ant.target_entered.connect(_on_ant_enter_target)
 
 	%PheromoneTrail.clear_points()
+	%PheromoneTrail.width = PHEROMONE_TRAIL_WIDTH_DEFAULT
 	%PheromoneTrail.add_point(ant.global_position)
 
 func _ready():
@@ -56,7 +60,9 @@ func end_level():
 	ant.disable_camera()
 	target_reached.emit()
 	current_picture.show_full_image(ant.get_camera_position(), ant.zoom_default)
-	%PheromoneTrail.width = 2
+
+	var tween = create_tween()
+	tween.tween_property(%PheromoneTrail, "width", PHEROMONE_TRAIL_END, Picture.END_CAMERA_ZOOM_DURATION).set_trans(Tween.TRANS_EXPO)
 
 	await get_tree().create_timer(10).timeout
 	var next_level_index: int = (level_index + 1) % levels.size()

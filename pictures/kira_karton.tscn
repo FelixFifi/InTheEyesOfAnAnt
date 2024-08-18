@@ -10,7 +10,7 @@ target_description = "the tip of an ear"
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(0, -1)
-scale = Vector2(0.178, 0.178)
+scale = Vector2(1.78, 1.78)
 texture = ExtResource("1_yj01d")
 
 [node name="SpawnPoint" type="Node2D" parent="Sprite"]
@@ -37,4 +37,4 @@ polygon = PackedVector2Array(-842.697, -623.596, -808.989, -477.528, -674.157, -
 unique_name_in_owner = true
 position = Vector2(0, -1)
 scale = Vector2(0.178, 0.178)
-zoom = Vector2(1.06, 1.06)
+zoom = Vector2(0.106, 0.106)

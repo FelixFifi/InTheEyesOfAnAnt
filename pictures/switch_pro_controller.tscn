@@ -9,8 +9,9 @@ valid_guesses = Array[String](["controller", "switch pro", "Switch controller", 
 target_description = "the A button"
 
 [node name="Controller" type="Sprite2D" parent="."]
+position = Vector2(-6, -29)
 rotation = 4.71239
-scale = Vector2(0.047, 0.047)
+scale = Vector2(0.47, 0.47)
 texture = ExtResource("2_spssu")
 
 [node name="SpawnPoint" type="Node2D" parent="Controller"]
@@ -18,17 +19,20 @@ unique_name_in_owner = true
 position = Vector2(-1212.77, -1361.7)
 rotation = 0.706858
 
-[node name="EndCamera" type="Camera2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(0, -1)
-scale = Vector2(0.178, 0.178)
-zoom = Vector2(4.155, 4.155)
-
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="Controller"]
+rotation = 1.5708
+scale = Vector2(2.12766, 2.12766)
 collision_layer = 2
 collision_mask = 0
 monitoring = false
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-position = Vector2(107, -34)
-polygon = PackedVector2Array(-52, 12, -58, 13, -59, 17, -58, 20, -54, 22, -49, 21, -48, 16)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Controller/Area2D"]
+position = Vector2(978.251, -281.75)
+scale = Vector2(7.85795, 7.75)
+polygon = PackedVector2Array(-54.3717, 7.70968, -60.9892, 9, -63.5344, 14.9355, -59.4621, 19.9677, -53.3536, 20.6129, -49.9176, 18.4194, -49.7904, 11.9677)
+
+[node name="EndCamera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -1)
+scale = Vector2(0.178, 0.178)
+zoom = Vector2(0.416, 0.416)
