@@ -14,8 +14,12 @@ var finished: bool = false
 
 func _ready():
 	ant = ANT.instantiate()
-	%SpawnPoint.add_child(ant)
+	ant.position = %SpawnPoint.global_position
+	add_child(ant)
 	%EndCamera.enabled = false
+
+	# Lowercase with type hack, as map returns generic Array and not Array[String]
+	valid_guesses.assign(valid_guesses.map(func (s: String) -> String: return s.to_lower()))
 
 func get_ant():
 	return ant

@@ -8,7 +8,7 @@ radius = 63.56
 height = 127.12
 
 [node name="Ant" type="Node2D"]
-z_index = 1
+z_index = 2
 script = ExtResource("1_4nt48")
 speed = 10.0
 rotate_speed = 1.11

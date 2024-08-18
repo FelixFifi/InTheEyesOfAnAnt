@@ -1,22 +1,19 @@
 [gd_scene load_steps=5 format=3 uid="uid://dixe43c8v5eku"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_4m6vn"]
-[ext_resource type="PackedScene" uid="uid://bqe1n8j6y1kct" path="res://kira_karton.tscn" id="2_bdshh"]
-[ext_resource type="PackedScene" uid="uid://cs6uyiqu4q57x" path="res://guess_ui.tscn" id="4_7p14f"]
+[ext_resource type="PackedScene" uid="uid://c6h2nfmdo6hyw" path="res://pictures/switch_pro_controller.tscn" id="2_a3rln"]
+[ext_resource type="PackedScene" uid="uid://bqe1n8j6y1kct" path="res://pictures/kira_karton.tscn" id="2_bdshh"]
 
 [sub_resource type="Gradient" id="Gradient_0a3wx"]
 colors = PackedColorArray(1, 0, 0, 0.129412, 1, 0, 0, 0.737255)
 
 [node name="GameMaster" type="Node2D"]
 script = ExtResource("1_4m6vn")
-
-[node name="KiraKarton" parent="." instance=ExtResource("2_bdshh")]
-
-[node name="GuessUI" parent="." instance=ExtResource("4_7p14f")]
-unique_name_in_owner = true
+levels = Array[PackedScene]([ExtResource("2_a3rln"), ExtResource("2_bdshh")])
 
 [node name="PheromoneTrail" type="Line2D" parent="."]
 unique_name_in_owner = true
+z_index = 1
 width = 1.0
 gradient = SubResource("Gradient_0a3wx")
 joint_mode = 2
@@ -25,8 +22,4 @@ joint_mode = 2
 wait_time = 0.1
 autostart = true
 
-[connection signal="guess_correct" from="." to="GuessUI" method="_on_game_master_guess_correct"]
-[connection signal="target_reached" from="." to="GuessUI" method="_on_game_master_target_reached"]
-[connection signal="guess_button_pressed" from="GuessUI" to="." method="_on_guess_ui_guess_button_pressed"]
-[connection signal="guess_text_focus_changed" from="GuessUI" to="." method="_on_guess_ui_guess_text_focus_changed"]
 [connection signal="timeout" from="PheromoneTrail/PheromoneTimer" to="." method="_on_pheromone_timer_timeout"]

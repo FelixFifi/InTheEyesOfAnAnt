@@ -1,5 +1,7 @@
 extends Control
 
+class_name GuessUI
+
 signal guess_button_pressed(guess: String)
 signal guess_text_focus_changed(focused: bool)
 
@@ -18,7 +20,7 @@ func _on_guess_text_focus_exited():
 	guess_text_focus_changed.emit(false)
 
 
-func _on_game_master_guess_correct(solution, target_description):
+func guess_correct(solution, target_description):
 	%GuessCorrectLabel.text = "You guessed correctly!
 	This is a {0}
 

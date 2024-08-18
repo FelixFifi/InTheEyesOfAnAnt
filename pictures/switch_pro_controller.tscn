@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6h2nfmdo6hyw"]
+
+[ext_resource type="Script" path="res://picture.gd" id="1_rmqbt"]
+[ext_resource type="Texture2D" uid="uid://b26cgo0p3fxm1" path="res://pictures/Controller.jpg" id="2_spssu"]
+
+[node name="SwitchProController" type="Node2D"]
+script = ExtResource("1_rmqbt")
+valid_guesses = Array[String](["controller", "switch pro", "Switch controller", "Switch Pro Controller", "Game Controller", "Nintendo Controller"])
+target_description = "the A button"
+
+[node name="Controller" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.047, 0.047)
+texture = ExtResource("2_spssu")
+
+[node name="SpawnPoint" type="Node2D" parent="Controller"]
+unique_name_in_owner = true
+position = Vector2(-1212.77, -1361.7)
+scale = Vector2(5.61798, 5.61798)
+
+[node name="EndCamera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -1)
+scale = Vector2(0.178, 0.178)
+zoom = Vector2(4.155, 4.155)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-54, 11, -58, 13, -59, 17, -58, 20, -54, 22, -49, 20, -49, 14)
