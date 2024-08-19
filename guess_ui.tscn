@@ -5,19 +5,10 @@
 [sub_resource type="Theme" id="Theme_dmn5a"]
 default_font_size = 25
 
-[node name="GuessUI" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="GuessUI" type="CanvasLayer"]
 script = ExtResource("1_o0wh0")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="GuessContainer" type="VBoxContainer" parent="CanvasLayer"]
-unique_name_in_owner = true
+[node name="GuessContainer" type="VBoxContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -26,17 +17,83 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Control" type="Control" parent="CanvasLayer/GuessContainer"]
+[node name="Control2" type="HBoxContainer" parent="GuessContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 13.45
+
+[node name="Control" type="Control" parent="GuessContainer/Control2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 15.0
+
+[node name="HelpButton" type="Button" parent="GuessContainer/Control2"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 25
+text = "?"
+
+[node name="SpacerInsteadOfHelp" type="Control" parent="GuessContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 9.0
 focus_mode = 1
 
-[node name="Panel" type="Panel" parent="CanvasLayer/GuessContainer"]
+[node name="HelpContainer" type="HBoxContainer" parent="GuessContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 9.0
+
+[node name="Control" type="Control" parent="GuessContainer/HelpContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer3" type="PanelContainer" parent="GuessContainer/HelpContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+
+[node name="MarginContainer" type="MarginContainer" parent="GuessContainer/HelpContainer/PanelContainer3"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GuessContainer/HelpContainer/PanelContainer3/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "\"[b]In the eyes of an ant[/b], everything we see as ordinary, is gigantic.\"
+- Me, 2024
+
+Now, you are one of these ants and will explore objects that we have all seen before.
+
+Your task will be to identify what object you are exploring, and then demonstrating your navigation skills when confronted with obejcts of a vastly different scale.
+
+Controls:
+[ul]
+ [b]WASD[/b] to move and turn
+ [b]Space[/b] to activate your wings for a short leap forwards
+ [b]Enter[/b] to enter and submit your guess
+[/ul]
+
+
+[i]Close this menu with the ?-button on the top right to start exploring![/i]"
+
+[node name="Control2" type="Control" parent="GuessContainer/HelpContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GuessPanel" type="Panel" parent="GuessContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GuessContainer/Panel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GuessContainer/GuessPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,11 +102,11 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Control2" type="Control" parent="CanvasLayer/GuessContainer/Panel/HBoxContainer"]
+[node name="Control2" type="Control" parent="GuessContainer/GuessPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="GuessText" type="LineEdit" parent="CanvasLayer/GuessContainer/Panel/HBoxContainer"]
+[node name="GuessText" type="LineEdit" parent="GuessContainer/GuessPanel/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -59,17 +116,23 @@ placeholder_text = "What is the ant exploring?"
 max_length = 64
 context_menu_enabled = false
 
-[node name="GuessButton" type="Button" parent="CanvasLayer/GuessContainer/Panel/HBoxContainer"]
+[node name="GuessButton" type="Button" parent="GuessContainer/GuessPanel/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Guess!"
 
-[node name="Control" type="Control" parent="CanvasLayer/GuessContainer/Panel/HBoxContainer"]
+[node name="Control" type="Control" parent="GuessContainer/GuessPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="GuessCorrectContainer" type="CenterContainer" parent="CanvasLayer"]
+[node name="SpacerInsteadOfGuessPanel" type="Control" parent="GuessContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GuessCorrectContainer" type="CenterContainer" parent="."]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 15
@@ -80,11 +143,18 @@ grow_vertical = 2
 focus_mode = 1
 mouse_filter = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GuessCorrectContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="GuessCorrectContainer"]
 layout_mode = 2
 focus_mode = 1
 
-[node name="GuessCorrectLabel" type="Label" parent="CanvasLayer/GuessCorrectContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="GuessCorrectContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GuessCorrectLabel" type="Label" parent="GuessCorrectContainer/PanelContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 1
@@ -94,14 +164,15 @@ text = "You guessed correctly!
 This is a \"...\""
 horizontal_alignment = 1
 
-[node name="ObjectivePanel" type="Panel" parent="CanvasLayer"]
+[node name="ObjectivePanel" type="Panel" parent="."]
 unique_name_in_owner = true
-offset_left = 805.0
+visible = false
+offset_left = 707.0
 offset_top = 14.0
-offset_right = 1139.0
+offset_right = 1041.0
 offset_bottom = 146.0
 
-[node name="Objective" type="Label" parent="CanvasLayer/ObjectivePanel"]
+[node name="Objective" type="Label" parent="ObjectivePanel"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -116,7 +187,7 @@ grow_vertical = 2
 text = "Current Objective:
 Guess the object you are traveling on"
 
-[node name="PanelWin" type="Panel" parent="CanvasLayer"]
+[node name="PanelWin" type="Panel" parent="."]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(7.81, 20.395)
@@ -132,7 +203,7 @@ offset_bottom = 28.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/PanelWin"]
+[node name="Label" type="Label" parent="PanelWin"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -148,7 +219,8 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 33
 text = "You win!"
 
-[connection signal="focus_entered" from="CanvasLayer/GuessContainer/Panel/HBoxContainer/GuessText" to="." method="_on_guess_text_focus_entered"]
-[connection signal="focus_exited" from="CanvasLayer/GuessContainer/Panel/HBoxContainer/GuessText" to="." method="_on_guess_text_focus_exited"]
-[connection signal="text_submitted" from="CanvasLayer/GuessContainer/Panel/HBoxContainer/GuessText" to="." method="_on_guess_text_text_submitted"]
-[connection signal="pressed" from="CanvasLayer/GuessContainer/Panel/HBoxContainer/GuessButton" to="." method="_on_guess_button_pressed"]
+[connection signal="pressed" from="GuessContainer/Control2/HelpButton" to="." method="_on_help_button_pressed"]
+[connection signal="focus_entered" from="GuessContainer/GuessPanel/HBoxContainer/GuessText" to="." method="_on_guess_text_focus_entered"]
+[connection signal="focus_exited" from="GuessContainer/GuessPanel/HBoxContainer/GuessText" to="." method="_on_guess_text_focus_exited"]
+[connection signal="text_submitted" from="GuessContainer/GuessPanel/HBoxContainer/GuessText" to="." method="_on_guess_text_text_submitted"]
+[connection signal="pressed" from="GuessContainer/GuessPanel/HBoxContainer/GuessButton" to="." method="_on_guess_button_pressed"]

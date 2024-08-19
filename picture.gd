@@ -38,7 +38,7 @@ func _ready():
 	# Lowercase with type hack, as map returns generic Array and not Array[String]
 	valid_guesses.assign(valid_guesses.map(func (s: String) -> String: return s.to_lower()))
 
-func _process(delta):
+func _process(_delta):
 	if finished:
 		return
 	%Sprite.material.set_shader_parameter("ant_uv", get_ant_on_image_uv())

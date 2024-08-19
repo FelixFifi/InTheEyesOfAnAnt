@@ -40,7 +40,7 @@ func _process(delta):
 
 
 func _unhandled_input(event):
-	if not flying and fly_available and event.is_action_pressed("ant_fly"):
+	if movement_allowed and not flying and fly_available and event.is_action_pressed("ant_fly"):
 		start_flying()
 
 func start_flying():
