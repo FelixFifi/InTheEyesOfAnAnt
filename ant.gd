@@ -13,8 +13,11 @@ class_name Ant
 var movement_allowed: bool = true
 var flying: bool = false
 var fly_available: bool = true
+const FLY_ANIMATION_DURATION: float = 0.5
 
 signal target_entered()
+signal flying_started()
+signal flying_stopped()
 
 
 # Called when the node enters the scene tree for the first time.
@@ -50,6 +53,8 @@ func start_flying():
 	tween.parallel().tween_property(%Camera, "zoom", Vector2(zoom_flying, zoom_flying), 0.5).set_trans(Tween.TRANS_LINEAR)
 	tween.parallel().tween_property(self, "scale", Vector2(zoom_default / zoom_flying, zoom_default / zoom_flying), 0.5)
 
+	flying_started.emit()
+
 
 func stop_flying():
 	flying = false
@@ -59,6 +64,8 @@ func stop_flying():
 	var tween = create_tween()
 	tween.parallel().tween_property(%Camera, "zoom", Vector2(zoom_default, zoom_default), 0.5).set_trans(Tween.TRANS_LINEAR)
 	tween.parallel().tween_property(self, "scale", Vector2(1, 1), 0.5)
+
+	flying_stopped.emit()
 
 
 func enable_target_search():

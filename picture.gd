@@ -20,7 +20,10 @@ func _ready():
 	ant = ANT.instantiate()
 	ant.position = %SpawnPoint.global_position
 	ant.rotation = %SpawnPoint.global_rotation
+	ant.flying_started.connect(_on_ant_flying_started)
+	ant.flying_stopped.connect(_on_ant_flying_stopped)
 	add_child(ant)
+
 	%EndCamera.enabled = false
 
 	var image_size = %Sprite.texture.get_size()
@@ -63,3 +66,11 @@ func show_full_image(start_position: Vector2, start_zoom: float):
 	var tween = create_tween()
 	tween.parallel().tween_property(%EndCamera, "zoom", Vector2(target_camera_zoom, target_camera_zoom), END_CAMERA_ZOOM_DURATION).set_trans(Tween.TRANS_EXPO)
 	tween.parallel().tween_property(%EndCamera, "position", target_position, END_CAMERA_ZOOM_DURATION).set_trans(Tween.TRANS_EXPO)
+
+func _on_ant_flying_started():
+	var tween = create_tween()
+	tween.tween_method(func (value): %Sprite.material.set_shader_parameter("gradual_blur_radius", value), blur_radius, blur_radius / 2.5, ant.FLY_ANIMATION_DURATION).set_trans(Tween.TRANS_QUAD)
+
+func _on_ant_flying_stopped():
+	var tween = create_tween()
+	tween.tween_method(func (value): %Sprite.material.set_shader_parameter("gradual_blur_radius", value), blur_radius / 2.5, blur_radius, ant.FLY_ANIMATION_DURATION).set_trans(Tween.TRANS_QUAD)
