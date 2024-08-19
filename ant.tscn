@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://beh1h687x0i4e"]
+[gd_scene load_steps=14 format=3 uid="uid://beh1h687x0i4e"]
 
 [ext_resource type="Script" path="res://ant.gd" id="1_4nt48"]
 [ext_resource type="Texture2D" uid="uid://bdxpqa67ak2bv" path="res://sprites/ant.png" id="2_jfrn5"]
@@ -36,6 +36,54 @@ animations = [{
 radius = 62.5
 height = 175.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_is7hm"]
+atlas = ExtResource("2_jfrn5")
+region = Rect2(200, 210, 200, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lskoo"]
+atlas = ExtResource("2_jfrn5")
+region = Rect2(400, 210, 200, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ektpt"]
+atlas = ExtResource("2_jfrn5")
+region = Rect2(800, 210, 200, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mt38w"]
+atlas = ExtResource("2_jfrn5")
+region = Rect2(1000, 210, 200, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lnd8"]
+atlas = ExtResource("2_jfrn5")
+region = Rect2(600, 210, 200, 210)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1l7lc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_is7hm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lskoo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ektpt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mt38w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3lnd8")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 13.0
+}]
+
 [node name="Ant" type="Node2D"]
 z_index = 2
 script = ExtResource("1_4nt48")
@@ -49,7 +97,7 @@ zoom_flying = 2.0
 unique_name_in_owner = true
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_mkqnr")
-frame_progress = 0.982352
+frame_progress = 0.552569
 
 [node name="Area2D" type="Area2D" parent="AntSprite"]
 unique_name_in_owner = true
@@ -58,6 +106,12 @@ monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AntSprite/Area2D"]
 shape = SubResource("CapsuleShape2D_8il1n")
+
+[node name="WingsSprite" type="AnimatedSprite2D" parent="AntSprite"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.556863)
+sprite_frames = SubResource("SpriteFrames_1l7lc")
+frame_progress = 0.615086
 
 [node name="Camera" type="Camera2D" parent="."]
 unique_name_in_owner = true

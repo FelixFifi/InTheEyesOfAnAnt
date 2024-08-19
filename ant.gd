@@ -46,10 +46,10 @@ func _process(delta):
 		else:
 			moving = false
 
-		if moving and not %AntSprite.is_playing():
-			%AntSprite.play()
-		elif not moving and %AntSprite.is_playing():
-			%AntSprite.pause()
+	if moving and not %AntSprite.is_playing():
+		%AntSprite.play()
+	elif not moving and %AntSprite.is_playing():
+		%AntSprite.pause()
 
 
 
@@ -61,6 +61,7 @@ func start_flying():
 	flying = true
 	fly_available = false
 	%FlyTimer.start()
+	%WingsSprite.play("flying")
 
 	# zooms out to give illusion of more distance to surface while keeping the ant the same size
 	var tween = create_tween()
@@ -80,6 +81,9 @@ func stop_flying():
 	tween.parallel().tween_property(self, "scale", Vector2(1, 1), 0.5)
 
 	flying_stopped.emit()
+
+	await tween.finished
+	%WingsSprite.play("default")
 
 
 func enable_target_search():
