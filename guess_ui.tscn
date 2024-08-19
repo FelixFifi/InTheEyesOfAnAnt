@@ -35,7 +35,6 @@ text = "?"
 
 [node name="SpacerInsteadOfHelp" type="Control" parent="GuessContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 9.0
@@ -43,6 +42,7 @@ focus_mode = 1
 
 [node name="HelpContainer" type="HBoxContainer" parent="GuessContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 9.0
@@ -187,7 +187,7 @@ grow_vertical = 2
 text = "Current Objective:
 Guess the object you are traveling on"
 
-[node name="PanelWin" type="Panel" parent="."]
+[node name="PanelWin" type="PanelContainer" parent="."]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(7.81, 20.395)
@@ -196,31 +196,42 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -77.0
-offset_top = -28.0
-offset_right = 77.0
-offset_bottom = 28.0
+offset_left = -224.5
+offset_top = -109.5
+offset_right = 224.5
+offset_bottom = 109.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="PanelWin"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -33.5
-offset_top = -11.5
-offset_right = 33.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 33
-text = "You win!"
+[node name="MarginContainer" type="MarginContainer" parent="PanelWin"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelWin/MarginContainer"]
+layout_mode = 2
+
+[node name="WinLabel" type="Label" parent="PanelWin/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 6
+size_flags_stretch_ratio = 4.0
+theme_override_font_sizes/font_size = 24
+text = "You have successfully navigated a giant {0} as an ant!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="NextLevelButton" type="Button" parent="PanelWin/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Continue to next level"
 
 [connection signal="pressed" from="GuessContainer/Control2/HelpButton" to="." method="_on_help_button_pressed"]
 [connection signal="focus_entered" from="GuessContainer/GuessPanel/HBoxContainer/GuessText" to="." method="_on_guess_text_focus_entered"]
 [connection signal="focus_exited" from="GuessContainer/GuessPanel/HBoxContainer/GuessText" to="." method="_on_guess_text_focus_exited"]
 [connection signal="text_submitted" from="GuessContainer/GuessPanel/HBoxContainer/GuessText" to="." method="_on_guess_text_text_submitted"]
 [connection signal="pressed" from="GuessContainer/GuessPanel/HBoxContainer/GuessButton" to="." method="_on_guess_button_pressed"]
+[connection signal="pressed" from="PanelWin/MarginContainer/VBoxContainer/NextLevelButton" to="." method="_on_next_level_button_pressed"]

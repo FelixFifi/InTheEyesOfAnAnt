@@ -6,6 +6,7 @@ const ANT = preload("res://ant.tscn")
 const BLUR_MATERIAL = preload("res://blur_material.tres")
 
 @export var valid_guesses: Array[String] = []
+var correct_guess: String = ""
 @export var target_description: String
 var blur_radius: float = 120
 var blur_radius_flying: float = blur_radius / 2.5

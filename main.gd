@@ -21,6 +21,7 @@ func load_picture(picture_scene: PackedScene):
 	guess_ui.guess_button_pressed.connect(_on_guess_ui_guess_button_pressed)
 	guess_ui.guess_text_focus_changed.connect(_on_guess_ui_guess_text_focus_changed)
 	guess_ui.help_ui_visibility_changed.connect(_on_guess_ui_help_ui_visibility_changed)
+	guess_ui.next_level_button_pressed.connect(_on_guess_ui_next_level_button_pressed)
 
 	guess_ui.set_help_ui_visibility(is_first_level)
 
@@ -58,23 +59,20 @@ func _on_guess_ui_guess_text_focus_changed(focused):
 	current_picture.get_ant().movement_allowed = not focused
 
 func _on_guess_ui_guess_button_pressed(guess: String):
-	if guess.to_lower() in current_picture.get_valid_guesses():
+	guess = guess.to_lower()
+	if guess in current_picture.get_valid_guesses():
+		current_picture.correct_guess = guess
 		guess_ui.guess_correct(guess.to_lower(), current_picture.get_target_description())
 		ant.enable_target_search()
 
 func end_level():
 	current_picture.finished = true
 	ant.disable_camera()
-	guess_ui.handle_target_reached()
+	guess_ui.handle_target_reached(current_picture.correct_guess)
 	current_picture.show_full_image(ant.get_camera_position(), ant.zoom_default)
 
 	var tween = create_tween()
 	tween.tween_property(%PheromoneTrail, "width", PHEROMONE_TRAIL_END, Picture.END_CAMERA_ZOOM_DURATION).set_trans(Tween.TRANS_EXPO)
-
-	await get_tree().create_timer(10).timeout
-	var next_level_index: int = (level_index + 1) % levels.size()
-	load_picture(levels[next_level_index])
-	level_index = next_level_index
 
 func _on_ant_enter_target():
 	if current_picture.finished == false:
@@ -87,3 +85,8 @@ func _on_pheromone_timer_timeout():
 func _on_guess_ui_help_ui_visibility_changed(help_ui_visible: bool):
 	if ant != null:
 		ant.movement_allowed = not help_ui_visible
+
+func _on_guess_ui_next_level_button_pressed():
+	var next_level_index: int = (level_index + 1) % levels.size()
+	load_picture(levels[next_level_index])
+	level_index = next_level_index
