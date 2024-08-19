@@ -8,6 +8,7 @@ const BLUR_MATERIAL = preload("res://blur_material.tres")
 @export var valid_guesses: Array[String] = []
 @export var target_description: String
 var blur_radius: float = 120
+var blur_radius_flying: float = blur_radius / 2.5
 @export var blur_texture: Texture2D
 
 const END_CAMERA_ZOOM_DURATION: float = 4
@@ -38,12 +39,13 @@ func _ready():
 	valid_guesses.assign(valid_guesses.map(func (s: String) -> String: return s.to_lower()))
 
 func _process(delta):
+	if finished:
+		return
 	%Sprite.material.set_shader_parameter("ant_uv", get_ant_on_image_uv())
 
 func get_ant_on_image_uv():
 	var total_size: Vector2 = %Sprite.scale * %Sprite.texture.get_size()
 	var uv_position = (%Sprite.to_local(ant.global_position) * %Sprite.scale + total_size / 2.0) / total_size;
-	print(uv_position)
 	return uv_position
 
 func get_ant():
@@ -63,14 +65,29 @@ func show_full_image(start_position: Vector2, start_zoom: float):
 	%EndCamera.zoom = Vector2(start_zoom, start_zoom)
 	%EndCamera.position = start_position
 
+
+	var picture_size: Vector2 = %Sprite.texture.get_size() * %Sprite.scale
+
 	var tween = create_tween()
 	tween.parallel().tween_property(%EndCamera, "zoom", Vector2(target_camera_zoom, target_camera_zoom), END_CAMERA_ZOOM_DURATION).set_trans(Tween.TRANS_EXPO)
 	tween.parallel().tween_property(%EndCamera, "position", target_position, END_CAMERA_ZOOM_DURATION).set_trans(Tween.TRANS_EXPO)
+	tween.parallel().tween_method(set_shader_blur_radius, blur_radius, max(picture_size.x, picture_size.y), END_CAMERA_ZOOM_DURATION).set_trans(Tween.TRANS_EXPO)
+
+	await tween.finished
+	finished = true
+	%Sprite.material = null
+
+func set_shader_blur_radius(value: float):
+	%Sprite.material.set_shader_parameter("gradual_blur_radius", value)
 
 func _on_ant_flying_started():
+	if finished:
+		return
 	var tween = create_tween()
-	tween.tween_method(func (value): %Sprite.material.set_shader_parameter("gradual_blur_radius", value), blur_radius, blur_radius / 2.5, ant.FLY_ANIMATION_DURATION).set_trans(Tween.TRANS_QUAD)
+	tween.tween_method(set_shader_blur_radius, blur_radius, blur_radius_flying, ant.FLY_ANIMATION_DURATION).set_trans(Tween.TRANS_QUAD)
 
 func _on_ant_flying_stopped():
+	if finished:
+		return
 	var tween = create_tween()
-	tween.tween_method(func (value): %Sprite.material.set_shader_parameter("gradual_blur_radius", value), blur_radius / 2.5, blur_radius, ant.FLY_ANIMATION_DURATION).set_trans(Tween.TRANS_QUAD)
+	tween.tween_method(set_shader_blur_radius, blur_radius_flying, blur_radius, ant.FLY_ANIMATION_DURATION).set_trans(Tween.TRANS_QUAD)
