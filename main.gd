@@ -45,6 +45,7 @@ func load_picture(picture_scene: PackedScene):
 
 func _ready():
 	load_picture(levels[level_index])
+	%Music.play()
 
 func _unhandled_key_input(event):
 	if OS.is_debug_build():
