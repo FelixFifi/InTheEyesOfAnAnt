@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6h2nfmdo6hyw"]
+[gd_scene load_steps=4 format=3 uid="uid://c6h2nfmdo6hyw"]
 
 [ext_resource type="Script" path="res://picture.gd" id="1_rmqbt"]
 [ext_resource type="Texture2D" uid="uid://gox6m7j708sh" path="res://pictures/Controller_blur140.jpg" id="2_5iw7p"]
 [ext_resource type="Texture2D" uid="uid://b26cgo0p3fxm1" path="res://pictures/Controller.jpg" id="2_spssu"]
-[ext_resource type="Material" uid="uid://blbimct8m6s3g" path="res://blur_material.tres" id="3_52yu4"]
 
 [node name="SwitchProController" type="Node2D"]
 script = ExtResource("1_rmqbt")
@@ -13,13 +12,13 @@ blur_texture = ExtResource("2_5iw7p")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-material = ExtResource("3_52yu4")
 rotation = 4.71239
 scale = Vector2(0.47, 0.47)
 texture = ExtResource("2_spssu")
 
 [node name="SpawnPoint" type="Node2D" parent="Sprite"]
 unique_name_in_owner = true
+position = Vector2(-1038.3, -1376.59)
 rotation = 0.706858
 
 [node name="Area2D" type="Area2D" parent="Sprite"]

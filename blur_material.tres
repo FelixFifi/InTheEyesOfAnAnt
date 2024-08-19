@@ -6,6 +6,6 @@
 [resource]
 shader = ExtResource("1_8lr1a")
 shader_parameter/ant_uv = Vector2(0.5, 0.5)
-shader_parameter/gradual_blur_radius = 0.03
-shader_parameter/texture_aspect_ratio = 1.33
+shader_parameter/gradual_blur_radius = 50.0
+shader_parameter/picture_size = Vector2(8230, 6180)
 shader_parameter/blur_texture = ExtResource("2_vcorn")
