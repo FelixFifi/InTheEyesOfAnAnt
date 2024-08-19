@@ -3,14 +3,18 @@ extends Node
 class_name Picture
 
 const ANT = preload("res://ant.tscn")
+const BLUR_MATERIAL = preload("res://blur_material.tres")
 
 @export var valid_guesses: Array[String] = []
 @export var target_description: String
+@export var blur_radius: float = 100
+@export var blur_texture: Texture2D
 
 const END_CAMERA_ZOOM_DURATION: float = 4
 
 var ant: Ant
 var finished: bool = false
+
 
 func _ready():
 	ant = ANT.instantiate()
@@ -19,8 +23,26 @@ func _ready():
 	add_child(ant)
 	%EndCamera.enabled = false
 
+	var image_width = %Sprite.texture.get_width()
+	var image_height = %Sprite.texture.get_height()
+
+	%Sprite.material = BLUR_MATERIAL
+	%Sprite.material.set_shader_parameter("ant_uv", get_ant_on_image_uv())
+	%Sprite.material.set_shader_parameter("texture_aspect_ratio", image_width / float(image_height))
+	%Sprite.material.set_shader_parameter("gradual_blur_radius", blur_radius / (image_width * %Sprite.scale.x))
+	%Sprite.material.set_shader_parameter("blur_texture", blur_texture)
+
 	# Lowercase with type hack, as map returns generic Array and not Array[String]
 	valid_guesses.assign(valid_guesses.map(func (s: String) -> String: return s.to_lower()))
+
+func _process(delta):
+	%Sprite.material.set_shader_parameter("ant_uv", get_ant_on_image_uv())
+
+func get_ant_on_image_uv():
+	var total_size: Vector2 = %Sprite.scale * %Sprite.texture.get_size()
+	var uv_position = (%Sprite.to_local(ant.global_position) * %Sprite.scale + total_size / 2.0) / total_size;
+	print(uv_position)
+	return uv_position
 
 func get_ant():
 	return ant
