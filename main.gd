@@ -62,7 +62,7 @@ func _on_guess_ui_guess_button_pressed(guess: String):
 	guess = guess.to_lower()
 	if guess in current_picture.get_valid_guesses():
 		current_picture.correct_guess = guess
-		guess_ui.guess_correct(guess.to_lower(), current_picture.get_target_description())
+		guess_ui.guess_correct(guess, current_picture.get_target_description())
 		ant.enable_target_search()
 
 func end_level():

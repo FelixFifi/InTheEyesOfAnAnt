@@ -11,6 +11,7 @@ class_name Ant
 @export var zoom_flying: float = 20
 
 var movement_allowed: bool = true
+var moving: bool = false
 var flying: bool = false
 var fly_available: bool = true
 const FLY_ANIMATION_DURATION: float = 0.5
@@ -32,10 +33,23 @@ func _process(delta):
 
 	if flying:
 		move_local_y(-delta * fly_speed)
+		moving = false
 	else:
-		move_local_y(-Input.get_axis("ant_backward", "ant_forward") * delta * speed)
+		var axis_forward_backward = Input.get_axis("ant_backward", "ant_forward")
+		move_local_y(- axis_forward_backward * delta * speed)
 
-		rotate(delta * rotate_speed * Input.get_axis("ant_turn_left", "ant_turn_right"))
+		var axis_turn = Input.get_axis("ant_turn_left", "ant_turn_right")
+		rotate(delta * rotate_speed * axis_turn)
+
+		if axis_turn != 0 or axis_forward_backward != 0:
+			moving = true
+		else:
+			moving = false
+
+		if moving and not %AntSprite.is_playing():
+			%AntSprite.play()
+		elif not moving and %AntSprite.is_playing():
+			%AntSprite.pause()
 
 
 
