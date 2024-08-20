@@ -7,7 +7,7 @@
 
 [node name="SwitchProController" type="Node2D"]
 script = ExtResource("1_rmqbt")
-valid_guesses = Array[String](["controller", "switch pro", "Switch controller", "Switch Pro Controller", "Game Controller", "Nintendo Controller"])
+valid_guesses = Array[String](["controller", "switch pro", "Switch controller", "Switch Pro Controller", "Game Controller", "Nintendo Controller", "Nintendo switch controller"])
 target_description = "the A button"
 blur_texture = ExtResource("2_2eiy7")
 

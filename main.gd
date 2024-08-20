@@ -81,6 +81,8 @@ func _on_guess_ui_guess_button_pressed(guess: String):
 		current_picture.correct_guess = guess
 		guess_ui.guess_correct(guess, current_picture.get_target_description())
 		ant.enable_target_search()
+	else:
+		guess_ui.guess_wrong()
 
 func end_level():
 	current_picture.finished = true

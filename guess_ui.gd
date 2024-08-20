@@ -7,6 +7,8 @@ signal guess_text_focus_changed(focused: bool)
 signal help_ui_visibility_changed(visible: bool)
 signal next_level_button_pressed()
 
+var last_guess_wrong: bool = false
+
 func _ready():
 	%GuessCorrectContainer.visible = false
 
@@ -105,3 +107,12 @@ func show_border_reached_dialog():
 
 	await tween.finished
 	%BorderReachedPanel.visible = false
+
+func guess_wrong():
+	last_guess_wrong = true
+	%GuessText.add_theme_color_override("font_color", Color(1,0,0))
+
+func _on_guess_text_text_changed(new_text):
+	if last_guess_wrong:
+		last_guess_wrong = false
+		%GuessText.remove_theme_color_override("font_color")
