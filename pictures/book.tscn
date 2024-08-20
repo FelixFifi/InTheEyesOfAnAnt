@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://x64e7ef6l3yf"]
+
+[ext_resource type="Script" path="res://picture.gd" id="1_x6v7k"]
+[ext_resource type="Texture2D" uid="uid://bq0yk5o42b43o" path="res://pictures/Book_blur120.jpg" id="2_0xbe4"]
+[ext_resource type="Texture2D" uid="uid://c2wqsndgxan6m" path="res://pictures/Book.jpg" id="3_0m8yc"]
+[ext_resource type="PackedScene" uid="uid://dpe1sxxfsh1gj" path="res://border.tscn" id="4_ypphx"]
+
+[node name="book" type="Node2D"]
+script = ExtResource("1_x6v7k")
+valid_guesses = Array[String](["Book", "What if", "What if 2", "xkcd book", "What if book", "What if 2 book"])
+target_description = "the number of the titel"
+blur_texture = ExtResource("2_0xbe4")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(0.54, 0.54)
+texture = ExtResource("3_0m8yc")
+
+[node name="SpawnPoint" type="Node2D" parent="Sprite"]
+unique_name_in_owner = true
+position = Vector2(641.51, -1166.98)
+rotation = 0.706858
+
+[node name="Area2D" type="Area2D" parent="Sprite"]
+rotation = 1.5708
+scale = Vector2(2.12766, 2.12766)
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite/Area2D"]
+position = Vector2(307.239, -486.538)
+scale = Vector2(7.85795, 7.75)
+polygon = PackedVector2Array(-43.9729, 3.59394, -66.9008, 3.93094, -67.0345, 20.6539, -43.6405, 21.4506)
+
+[node name="Border" parent="Sprite" instance=ExtResource("4_ypphx")]
+rotation = 1.5708
+scale = Vector2(6.305, 6.305)
+
+[node name="EndCamera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -1)
+scale = Vector2(0.178, 0.178)
+zoom = Vector2(0.246, 0.246)
