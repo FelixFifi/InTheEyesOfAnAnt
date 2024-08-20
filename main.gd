@@ -56,6 +56,21 @@ func _unhandled_key_input(event):
 		if event.is_action_pressed("level_2"):
 			load_picture(levels[1])
 			level_index = 1
+		if event.is_action_pressed("level_3"):
+			load_picture(levels[2])
+			level_index = 2
+		if event.is_action_pressed("level_4"):
+			load_picture(levels[3])
+			level_index = 3
+		if event.is_action_pressed("level_5"):
+			load_picture(levels[4])
+			level_index = 4
+		if event.is_action_pressed("level_6"):
+			load_picture(levels[5])
+			level_index = 5
+		if event.is_action_pressed("level_7"):
+			load_picture(levels[6])
+			level_index = 6
 
 func _on_guess_ui_guess_text_focus_changed(focused):
 	current_picture.get_ant().movement_allowed = not focused

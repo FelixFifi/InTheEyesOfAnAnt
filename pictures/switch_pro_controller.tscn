@@ -1,25 +1,25 @@
 [gd_scene load_steps=5 format=3 uid="uid://c6h2nfmdo6hyw"]
 
 [ext_resource type="Script" path="res://picture.gd" id="1_rmqbt"]
-[ext_resource type="Texture2D" uid="uid://gox6m7j708sh" path="res://pictures/Controller_blur140.jpg" id="2_5iw7p"]
-[ext_resource type="Texture2D" uid="uid://b26cgo0p3fxm1" path="res://pictures/Controller.jpg" id="2_spssu"]
+[ext_resource type="Texture2D" uid="uid://btohnxj8pg220" path="res://pictures/Controller_new_blur120.jpg" id="2_2eiy7"]
+[ext_resource type="Texture2D" uid="uid://njr72cilaxc5" path="res://pictures/Controller_new.jpg" id="3_qe2cp"]
 [ext_resource type="PackedScene" uid="uid://dpe1sxxfsh1gj" path="res://border.tscn" id="4_lvnun"]
 
 [node name="SwitchProController" type="Node2D"]
 script = ExtResource("1_rmqbt")
 valid_guesses = Array[String](["controller", "switch pro", "Switch controller", "Switch Pro Controller", "Game Controller", "Nintendo Controller"])
 target_description = "the A button"
-blur_texture = ExtResource("2_5iw7p")
+blur_texture = ExtResource("2_2eiy7")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 rotation = 4.71239
-scale = Vector2(0.47, 0.47)
-texture = ExtResource("2_spssu")
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("3_qe2cp")
 
 [node name="SpawnPoint" type="Node2D" parent="Sprite"]
 unique_name_in_owner = true
-position = Vector2(-1038.3, -1376.59)
+position = Vector2(-1237.78, -1222.22)
 rotation = 0.706858
 
 [node name="Area2D" type="Area2D" parent="Sprite"]
@@ -30,9 +30,9 @@ collision_mask = 0
 monitoring = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite/Area2D"]
-position = Vector2(978.251, -281.75)
+position = Vector2(1086.22, -291.405)
 scale = Vector2(7.85795, 7.75)
-polygon = PackedVector2Array(-54.3717, 7.70968, -60.9892, 9, -63.5344, 14.9355, -59.4621, 19.9677, -53.3536, 20.6129, -49.9176, 18.4194, -49.7904, 11.9677)
+polygon = PackedVector2Array(-54.6283, 6.87337, -60.9892, 9, -63.5344, 14.9355, -59.4621, 19.9677, -53.1661, 21.0239, -49.5774, 18.5981, -48.78, 11.725)
 
 [node name="Border" parent="Sprite" instance=ExtResource("4_lvnun")]
 rotation = 1.5708
