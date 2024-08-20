@@ -8,7 +8,7 @@
 [node name="book" type="Node2D"]
 script = ExtResource("1_x6v7k")
 valid_guesses = Array[String](["Book", "What if", "What if 2", "xkcd book", "What if book", "What if 2 book"])
-target_description = "the number of the titel"
+target_description = "the number in the title"
 blur_texture = ExtResource("2_0xbe4")
 
 [node name="Sprite" type="Sprite2D" parent="."]
