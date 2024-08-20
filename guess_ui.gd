@@ -90,3 +90,18 @@ func _on_help_button_pressed():
 
 func _on_next_level_button_pressed():
 	next_level_button_pressed.emit()
+
+func show_border_reached_dialog():
+	%BorderReachedPanel.visible = true
+	%BorderReachedPanel.modulate = Color(1,1,1,0)
+	var tween = create_tween()
+
+	tween.tween_property(%BorderReachedPanel, "modulate", Color(1,1,1,1), 0.5)
+
+	await tween.finished
+
+	tween = create_tween()
+	tween.tween_property(%BorderReachedPanel, "modulate", Color(1,1,1,0), 0.5).set_delay(5)
+
+	await tween.finished
+	%BorderReachedPanel.visible = false

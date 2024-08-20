@@ -16,7 +16,10 @@ var flying: bool = false
 var fly_available: bool = true
 const FLY_ANIMATION_DURATION: float = 0.5
 
+var target_active: bool = false
+
 signal target_entered()
+signal border_entered()
 signal flying_started()
 signal flying_stopped()
 
@@ -50,7 +53,6 @@ func _process(delta):
 		%AntSprite.play()
 	elif not moving and %AntSprite.is_playing():
 		%AntSprite.pause()
-
 
 
 func _unhandled_input(event):
@@ -87,7 +89,7 @@ func stop_flying():
 
 
 func enable_target_search():
-	%Area2D.monitoring = true
+	target_active = true
 
 func disable_camera():
 	%Camera.enabled = false
@@ -102,5 +104,10 @@ func _on_fly_cooldown_timer_timeout():
 	fly_available = true
 
 
-func _on_area_2d_area_entered(_area):
-	target_entered.emit()
+func _on_area_2d_area_entered(area: Area2D):
+	const LAYER_TARGET: int = 2
+	const LAYER_BORDER: int = 3
+	if target_active and area.get_collision_layer_value(LAYER_TARGET):
+		target_entered.emit()
+	elif area.get_collision_layer_value(LAYER_BORDER):
+		border_entered.emit()

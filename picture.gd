@@ -24,6 +24,7 @@ func _ready():
 	ant.rotation = %SpawnPoint.global_rotation
 	ant.flying_started.connect(_on_ant_flying_started)
 	ant.flying_stopped.connect(_on_ant_flying_stopped)
+	ant.border_entered.connect(_on_ant_border_entered)
 	add_child(ant)
 
 	%EndCamera.enabled = false
@@ -92,3 +93,6 @@ func _on_ant_flying_stopped():
 		return
 	var tween = create_tween()
 	tween.tween_method(set_shader_blur_radius, blur_radius_flying, blur_radius, ant.FLY_ANIMATION_DURATION).set_trans(Tween.TRANS_QUAD)
+
+func _on_ant_border_entered():
+	ant.position = %SpawnPoint.global_position

@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpe1sxxfsh1gj"]
+
+[ext_resource type="Texture2D" uid="uid://dtfviy3c6k1n8" path="res://sprites/border.png" id="1_timil"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7x711"]
+distance = -264.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qapmn"]
+normal = Vector2(0, 1)
+distance = -264.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bj2xb"]
+normal = Vector2(1, 0)
+distance = -364.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kkq4t"]
+normal = Vector2(-1, 0)
+distance = -364.0
+
+[node name="Border" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_timil")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+shape = SubResource("WorldBoundaryShape2D_7x711")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+shape = SubResource("WorldBoundaryShape2D_qapmn")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+shape = SubResource("WorldBoundaryShape2D_bj2xb")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+shape = SubResource("WorldBoundaryShape2D_kkq4t")

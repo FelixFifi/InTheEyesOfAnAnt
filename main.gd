@@ -36,6 +36,7 @@ func load_picture(picture_scene: PackedScene):
 	ant.movement_allowed = not is_first_level
 
 	ant.target_entered.connect(_on_ant_enter_target)
+	ant.border_entered.connect(_on_ant_border_entered)
 
 	%PheromoneTrail.clear_points()
 	%PheromoneTrail.width = PHEROMONE_TRAIL_WIDTH_DEFAULT
@@ -91,3 +92,6 @@ func _on_guess_ui_next_level_button_pressed():
 	var next_level_index: int = (level_index + 1) % levels.size()
 	load_picture(levels[next_level_index])
 	level_index = next_level_index
+
+func _on_ant_border_entered():
+	guess_ui.show_border_reached_dialog()

@@ -78,3 +78,4 @@ level_2={
 
 2d_physics/layer_1="Ant"
 2d_physics/layer_2="Target"
+2d_physics/layer_3="Border"

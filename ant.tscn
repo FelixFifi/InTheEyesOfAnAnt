@@ -101,8 +101,7 @@ frame_progress = 0.552569
 
 [node name="Area2D" type="Area2D" parent="AntSprite"]
 unique_name_in_owner = true
-collision_mask = 2
-monitoring = false
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AntSprite/Area2D"]
 shape = SubResource("CapsuleShape2D_8il1n")
@@ -111,7 +110,7 @@ shape = SubResource("CapsuleShape2D_8il1n")
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.556863)
 sprite_frames = SubResource("SpriteFrames_1l7lc")
-frame_progress = 0.615086
+frame_progress = 0.639536
 
 [node name="Camera" type="Camera2D" parent="."]
 unique_name_in_owner = true
