@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://main.gd" id="1_4m6vn"]
 [ext_resource type="PackedScene" uid="uid://c6h2nfmdo6hyw" path="res://pictures/switch_pro_controller.tscn" id="2_a3rln"]
-[ext_resource type="PackedScene" uid="uid://bqe1n8j6y1kct" path="res://pictures/kira_karton.tscn" id="2_bdshh"]
+[ext_resource type="PackedScene" uid="uid://5qvp2bj7u545" path="res://pictures/kira.tscn" id="3_jrccp"]
 [ext_resource type="AudioStream" uid="uid://ccpyxgdgiwavw" path="res://music/ant_game.wav" id="4_y4c86"]
 
 [sub_resource type="Gradient" id="Gradient_0a3wx"]
@@ -10,7 +10,7 @@ colors = PackedColorArray(1, 0, 0, 0.129412, 1, 0, 0, 0.737255)
 
 [node name="GameMaster" type="Node2D"]
 script = ExtResource("1_4m6vn")
-levels = Array[PackedScene]([ExtResource("2_a3rln"), ExtResource("2_bdshh")])
+levels = Array[PackedScene]([ExtResource("2_a3rln"), ExtResource("3_jrccp")])
 
 [node name="PheromoneTrail" type="Line2D" parent="."]
 unique_name_in_owner = true

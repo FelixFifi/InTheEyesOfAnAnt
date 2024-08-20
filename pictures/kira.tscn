@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://5qvp2bj7u545"]
+
+[ext_resource type="Script" path="res://picture.gd" id="1_bs3tr"]
+[ext_resource type="Texture2D" uid="uid://cf782jltn5dai" path="res://pictures/Kira_blur200.jpg" id="2_e83eg"]
+[ext_resource type="Texture2D" uid="uid://dg574plbdyras" path="res://pictures/Kira.JPG" id="3_dvhbn"]
+[ext_resource type="PackedScene" uid="uid://dpe1sxxfsh1gj" path="res://border.tscn" id="4_4qdpq"]
+
+[node name="Kira" type="Node2D"]
+script = ExtResource("1_bs3tr")
+valid_guesses = Array[String](["Cat", "Feline", "Kitty", "Kira", "Pussy", "maine coon"])
+target_description = "the tip of an ear"
+blur_texture = ExtResource("2_e83eg")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(33, -8)
+rotation = -1.5708
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("3_dvhbn")
+
+[node name="SpawnPoint" type="Node2D" parent="Sprite"]
+unique_name_in_owner = true
+position = Vector2(-2071.7, -1253.77)
+rotation = 0.706858
+
+[node name="Area2D" type="Area2D" parent="Sprite"]
+rotation = 1.5708
+scale = Vector2(2.12766, 2.12766)
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite/Area2D"]
+position = Vector2(807.864, -1189.63)
+scale = Vector2(7.85795, 7.75)
+polygon = PackedVector2Array(-53.2665, 8.69647, -60.9892, 9, -67.0345, 20.6539, -50.163, 21.1115)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Sprite/Area2D"]
+position = Vector2(298.402, -1081.44)
+scale = Vector2(7.85795, 7.75)
+polygon = PackedVector2Array(-60.5455, 6.40802, -67.3731, 10.7562, -65.6239, 19.6813, -49.7116, 14.2461)
+
+[node name="Border" parent="Sprite" instance=ExtResource("4_4qdpq")]
+position = Vector2(0, -88.195)
+scale = Vector2(7.23, 7.23)
+
+[node name="EndCamera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -1)
+scale = Vector2(0.178, 0.178)
+zoom = Vector2(0.111, 0.111)
