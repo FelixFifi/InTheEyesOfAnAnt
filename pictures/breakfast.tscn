@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7tw86234tgj0"]
+
+[ext_resource type="Script" path="res://picture.gd" id="1_vs3gj"]
+[ext_resource type="Texture2D" uid="uid://dsv4eh3qa3p6s" path="res://pictures/breakfast_blur150.jpg" id="2_ipca0"]
+[ext_resource type="Texture2D" uid="uid://bbddjxe5n4s8h" path="res://pictures/breakfast.JPG" id="3_81km0"]
+[ext_resource type="PackedScene" uid="uid://dpe1sxxfsh1gj" path="res://border.tscn" id="4_6bjsg"]
+
+[node name="breakfast" type="Node2D"]
+script = ExtResource("1_vs3gj")
+valid_guesses = Array[String](["breakfast", "bread", "nutella", "nutella bread", "plate", "slice of bread", "sandwich", "letters from felix", "felix", "felix plate"])
+target_description = "the handle of the knive"
+blur_texture = ExtResource("2_ipca0")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(0.716, 0.716)
+texture = ExtResource("3_81km0")
+
+[node name="SpawnPoint" type="Node2D" parent="Sprite"]
+unique_name_in_owner = true
+position = Vector2(1060.06, 905.028)
+rotation = 0.706858
+
+[node name="Area2D" type="Area2D" parent="Sprite"]
+rotation = 1.5708
+scale = Vector2(2.12766, 2.12766)
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite/Area2D"]
+position = Vector2(307.239, -486.538)
+scale = Vector2(7.85795, 7.75)
+polygon = PackedVector2Array(-33.0585, -57.9048, -42.7481, -64.6364, -91.1357, 13.4141, -85.1545, 17.1135)
+
+[node name="Border" parent="Sprite" instance=ExtResource("4_6bjsg")]
+position = Vector2(0, 48.68)
+scale = Vector2(7.09, 7.09)
+
+[node name="EndCamera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -1)
+scale = Vector2(0.178, 0.178)
+zoom = Vector2(0.246, 0.246)
